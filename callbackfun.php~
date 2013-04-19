@@ -1,0 +1,87 @@
+<?php
+//$mysql_conn=mysql_connect("local","root","pass");
+//@mysql_select_db("DB",$mysql_conn);
+//$result=mysql_query("SELECT * FROM user where Name='张三'");
+//while($rs=mysql_fetch_array($result)){
+//echo $rs['Tel'].$rs['Content'].$rs['Date'];}
+
+$bing='hello world!';
+echo strstr($bing,'wo');
+echo '<br>';
+var_dump(strstr($bing,'l'));
+
+  function getExt($url) {
+	  echo $url = basename($url);
+	  echo '<Br>';
+    echo $pos1 = strpos($url,".");
+echo '<Br>';
+echo $pos2 = strpos($url,"?");
+
+var_dump(substr($url,$pos1 + 1,$pos2 - $pos1 - 1));
+
+if(strstr($url,"?")){
+	    return substr($url,$pos1 + 1,$pos2 - $pos1 - 1);
+	   
+    } else {
+      return substr($url,$pos1);
+    }
+}
+var_dump(getExt('http://www.sina.com.cn/abc/de/fg.php?id=1'));
+
+echo '###########################################';
+
+$a ='/a/b/c/d/f/g/e.php';
+$b ='/a/b/12/34/56/c.php';
+
+var_dump(getpathinfo($a,$b));
+
+function getpathinfo($a,$b){
+var_dump($a2array = explode('/',$a));
+var_dump($b2array = explode('/',$b));
+var_dump(count($b2array)-2);
+
+$pathinfo = '';
+for($i=1;$i <=count($b2array)-2;$i++) {
+var_dump($pathinfo.=$a2array[$i] == $b2array[$i] ? '../' : $b2array[$i].'/');
+}
+print_R($pathinfo);
+}
+echo '###########################################';
+
+$a = '/a/b/c/d/e.php';
+$b = '/a/b/12/34/c.php';
+$path = '';
+$path1 = explode ( '/', dirname ( $a ) );
+$path2 = explode ( '/', dirname ( $b ) );
+$aLen = count ( $path1 );
+$bLen = count ( $path2 );
+$maxLen = max ( $aLen, $bLen );
+for($i = 1; $i < $maxLen; $i ++) {
+    if ($path1 [$i] != $path2 [$i] && isset ( $path1 [$i] )) {
+        if (isset ( $path2 [$i] ))
+            $bUrl [] = $path2 [$i];
+        $path .= "../";
+    } else {
+        $bUrl [] = $path2 [$i];
+    }
+}
+echo $path . implode ( '/', $bUrl ) . '/' . basename ( $b ); 
+
+echo '##123333333333333333333#';
+
+echo '<br>';
+function relative_dir($file_a,$file_b)
+{
+$a_ary = explode(‘/’,$file_a);
+$b_ary = explode(‘/’,$file_b);
+$a_diff = array_diff($a_ary,$b_ary);
+$b_diff = array_diff($b_ary,$a_ary);
+$ab_in = array_intersect($a_ary,$b_ary);
+//var_dump(count($a_diff)-1).implode('/',$b_diff));
+$relative_dir = str_repeat('../',count($a_diff)-1).implode('/',$b_diff);
+return $relative_dir;
+}
+$aa='/a/b/c/d/e.php';
+$bb='/a/b/12/34/c.php';
+echo relative_dir($aa,$bb);
+?>
